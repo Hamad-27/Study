@@ -477,6 +477,491 @@ footer {
     font-size: 50px;
   }
 }
+ /* =====================================================
+   STUDYZONE MODERN WELCOME SCREEN
+   ===================================================== */
+
+.sz-welcome {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 18px;
+  overflow: hidden;
+}
+
+
+/* BACKGROUND */
+
+.sz-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+
+.sz-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.35;
+  animation: szFloat 8s ease-in-out infinite;
+}
+
+
+.orb1 {
+  width: 260px;
+  height: 260px;
+  background: #5ee7ff;
+  top: -80px;
+  left: -80px;
+}
+
+
+.orb2 {
+  width: 300px;
+  height: 300px;
+  background: #7b61ff;
+  bottom: -120px;
+  right: -100px;
+  animation-delay: 2s;
+}
+
+
+.orb3 {
+  width: 180px;
+  height: 180px;
+  background: #ff5ec4;
+  top: 40%;
+  right: 5%;
+  animation-delay: 4s;
+}
+
+
+@keyframes szFloat {
+
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(25px, -25px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+
+}
+
+
+/* MAIN CARD */
+
+.sz-card {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 480px;
+
+  padding: 35px 30px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.045)
+    );
+
+  border: 1px solid rgba(255,255,255,0.16);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.45);
+
+  text-align: center;
+
+  animation: szCardIn 0.8s ease;
+}
+
+
+@keyframes szCardIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+/* LOGO ICON */
+
+.sz-icon {
+  width: 75px;
+  height: 75px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(94,231,255,0.2),
+      rgba(123,97,255,0.25)
+    );
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  font-size: 38px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+
+  animation: szIcon 3s ease-in-out infinite;
+}
+
+
+@keyframes szIcon {
+
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+}
+
+
+/* BRAND */
+
+.sz-brand {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+
+.sz-brand span {
+  color: #5ee7ff;
+}
+
+
+.sz-tagline {
+  margin-top: 7px;
+  color: rgba(255,255,255,0.65);
+  font-size: 14px;
+}
+
+
+/* WELCOME */
+
+.sz-welcome-title {
+  margin-top: 30px;
+
+  font-size: 28px;
+  font-weight: 800;
+}
+
+
+.sz-subtitle {
+  margin-top: 7px;
+  margin-bottom: 25px;
+
+  color: rgba(255,255,255,0.65);
+}
+
+
+/* FIELDS */
+
+.sz-field {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+
+.sz-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  color: rgba(255,255,255,0.9);
+}
+
+
+/* INPUT BOX */
+
+.sz-input-box {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 0 14px;
+
+  border-radius: 15px;
+
+  background: rgba(0,0,0,0.25);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+
+
+.sz-input-box span {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+
+.sz-input-box input,
+.sz-input-box select {
+
+  flex: 1;
+
+  width: 100%;
+
+  min-width: 0;
+
+  padding: 15px 5px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-family: inherit;
+}
+
+
+.sz-input-box input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+
+.sz-input-box select {
+  cursor: pointer;
+}
+
+
+.sz-input-box select option {
+  background: #111936;
+  color: white;
+}
+
+
+.sz-input-box:focus-within {
+
+  border-color: #5ee7ff;
+
+  box-shadow:
+    0 0 0 3px rgba(94,231,255,0.1);
+
+  transform: translateY(-2px);
+}
+
+
+/* CONTINUE BUTTON */
+
+.sz-continue {
+
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 16px;
+
+  border: none;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5ee7ff,
+      #7b61ff
+    );
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+
+.sz-continue::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 70%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.35),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.6s;
+}
+
+
+.sz-continue:hover::before {
+  left: 130%;
+}
+
+
+.sz-continue:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 30px rgba(94,231,255,0.2);
+}
+
+
+.sz-continue:active {
+  transform: scale(0.98);
+}
+
+
+.sz-continue strong {
+
+  margin-left: 8px;
+}
+
+
+/* FEATURES */
+
+.sz-features {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+
+.sz-features div {
+
+  padding: 12px 5px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+
+.sz-features span {
+
+  display: block;
+
+  font-size: 21px;
+
+  margin-bottom: 4px;
+}
+
+
+.sz-features small {
+
+  color: rgba(255,255,255,0.6);
+
+  font-size: 11px;
+}
+
+
+/* FOOTER */
+
+.sz-footer {
+
+  margin-top: 22px;
+
+  font-size: 12px;
+
+  color: rgba(255,255,255,0.4);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .sz-welcome {
+    padding: 20px 12px;
+  }
+
+  .sz-card {
+    padding: 28px 20px;
+    border-radius: 25px;
+  }
+
+  .sz-brand {
+    font-size: 30px;
+  }
+
+  .sz-welcome-title {
+    font-size: 25px;
+  }
+
+  .sz-features {
+    gap: 7px;
+  }
+
+}
 </style>
 </head>
  <body>
