@@ -1175,6 +1175,75 @@ footer {
   </div>
 
 </div>
+  <script>
+document.getElementById("studentForm").addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("studentName").value.trim();
+
+  const age =
+    document.getElementById("studentAge").value;
+
+  const studentClass =
+    document.getElementById("studentClass").value;
+
+
+  /* CHECK NAME */
+
+  if (name === "") {
+    alert("Please enter your name 😊");
+    document.getElementById("studentName").focus();
+    return;
+  }
+
+
+  /* CHECK AGE */
+
+  if (age === "" || age < 5 || age > 18) {
+    alert("Please enter a valid age between 5 and 18 🎂");
+    document.getElementById("studentAge").focus();
+    return;
+  }
+
+
+  /* CHECK CLASS */
+
+  if (studentClass === "") {
+    alert("Please select your class 🎓");
+    document.getElementById("studentClass").focus();
+    return;
+  }
+
+
+  /* SAVE STUDENT INFORMATION */
+
+  localStorage.setItem("studentName", name);
+  localStorage.setItem("studentAge", age);
+  localStorage.setItem("studentClass", studentClass);
+
+
+  /* HIDE WELCOME SCREEN */
+
+  const welcome =
+    document.getElementById("studentWelcome");
+
+  welcome.style.transition =
+    "opacity 0.5s ease, transform 0.5s ease";
+
+  welcome.style.opacity = "0";
+  welcome.style.transform = "scale(1.03)";
+
+
+  setTimeout(function() {
+
+    welcome.style.display = "none";
+
+  }, 500);
+
+});
+  </script>
  </body>
 
 
