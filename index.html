@@ -1379,6 +1379,323 @@ document.getElementById("studentForm").addEventListener("submit", function(event
     </a>
   </div>
  </div>
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyZone - Flashcards</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #080b16;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #aeb5cc;
+  margin-bottom: 25px;
+}
+
+/* Flashcard */
+.flashcard {
+  width: 100%;
+  min-height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.card-inner {
+  width: 100%;
+  min-height: 300px;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flashcard.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
+  border-radius: 25px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+
+  background: linear-gradient(145deg, #171c35, #0d1122);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #211b40, #101426);
+}
+
+.label {
+  color: #8e7cff;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.question {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.answer {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.hint {
+  margin-top: 20px;
+  color: #8f96ad;
+  font-size: 14px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 13px 22px;
+  border-radius: 14px;
+  color: white;
+  background: #191f38;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #252d4d;
+}
+
+.next {
+  background: linear-gradient(90deg, #6c5ce7, #8e7cff);
+}
+
+.progress {
+  margin-top: 20px;
+  color: #9da5bd;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  h1 {
+    font-size: 29px;
+  }
+
+  .question {
+    font-size: 22px;
+  }
+
+  .answer {
+    font-size: 21px;
+  }
+
+  .card-front,
+  .card-back {
+    padding: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🧠 Flashcards</h1>
+  <p class="subtitle">Learn faster. Flip the card to see the answer.</p>
+
+  <div class="flashcard" id="flashcard" onclick="flipCard()">
+
+    <div class="card-inner">
+
+      <div class="card-front">
+        <div class="label">QUESTION</div>
+        <div class="question" id="question">
+          Loading...
+        </div>
+        <div class="hint">👆 Tap the card to reveal the answer</div>
+      </div>
+
+      <div class="card-back">
+        <div class="label">ANSWER</div>
+        <div class="answer" id="answer">
+          Loading...
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="buttons">
+    <button onclick="previousCard(event)">⬅ Previous</button>
+    <button class="next" onclick="nextCard(event)">Next ➡</button>
+  </div>
+
+  <div class="progress" id="progress">
+    Card 1 of 10
+  </div>
+
+</div>
+
+<script>
+
+const cards = [
+
+  {
+    question: "What is the process by which plants make food?",
+    answer: "Photosynthesis 🌱"
+  },
+
+  {
+    question: "What is the largest planet in our Solar System?",
+    answer: "Jupiter 🪐"
+  },
+
+  {
+    question: "What is 12 × 8?",
+    answer: "96 🔢"
+  },
+
+  {
+    question: "Which organ pumps blood around the body?",
+    answer: "The heart ❤️"
+  },
+
+  {
+    question: "What gas do humans need for respiration?",
+    answer: "Oxygen 🫁"
+  },
+
+  {
+    question: "What is the square of 9?",
+    answer: "81"
+  },
+
+  {
+    question: "What is the opposite of 'ancient'?",
+    answer: "Modern"
+  },
+
+  {
+    question: "Which force pulls objects toward Earth?",
+    answer: "Gravity 🌍"
+  },
+
+  {
+    question: "What is the boiling point of water?",
+    answer: "100°C 💧"
+  },
+
+  {
+    question: "What is the chemical symbol for oxygen?",
+    answer: "O"
+  }
+
+];
+
+let currentCard = 0;
+
+function showCard() {
+
+  const flashcard = document.getElementById("flashcard");
+
+  flashcard.classList.remove("flipped");
+
+  document.getElementById("question").textContent =
+    cards[currentCard].question;
+
+  document.getElementById("answer").textContent =
+    cards[currentCard].answer;
+
+  document.getElementById("progress").textContent =
+    "Card " + (currentCard + 1) + " of " + cards.length;
+}
+
+function flipCard() {
+  document.getElementById("flashcard").classList.toggle("flipped");
+}
+
+function nextCard(event) {
+
+  event.stopPropagation();
+
+  currentCard++;
+
+  if (currentCard >= cards.length) {
+    currentCard = 0;
+  }
+
+  showCard();
+}
+
+function previousCard(event) {
+
+  event.stopPropagation();
+
+  currentCard--;
+
+  if (currentCard < 0) {
+    currentCard = cards.length - 1;
+  }
+
+  showCard();
+}
+
+showCard();
+
+</script>
+
+</body>
+</html>
 <!-- ================= SUBJECTS ================= -->
 
 <section id="subjects">
@@ -1568,7 +1885,7 @@ document.getElementById("studentForm").addEventListener("submit", function(event
 
     <p>Stay focused and study without distractions.</p>
 
-    <div id="time">25:00</div>
+    <div id="time">30:00</div>
 
     <button onclick="startTimer()">▶ Start</button>
 
@@ -1612,24 +1929,6 @@ document.getElementById("studentForm").addEventListener("submit", function(event
   </div>
 
 </section>
-<div class="study-card">
-  <div class="card-icon">🃏</div>
-
-  <div class="card-content">
-    <span class="card-tag">STUDY TOOL</span>
-    <h2>Flashcards</h2>
-    <p>Flip cards and learn important Class 8 concepts quickly.</p>
-
-    <div class="card-info">
-      <span>🧠 10 Cards</span>
-      <span>📚 Quick Revision</span>
-    </div>
-
-    <a href="flashcards.html" class="quiz-btn">
-      Open Flashcards 🚀
-    </a>
-  </div>
-</div>
  
 </main>
 
