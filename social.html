@@ -4,394 +4,1230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Social Science | Study_net</title>
+<title>Class 8 Social Science | Study.net</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top left, #18235c, transparent 35%),
-        radial-gradient(circle at bottom right, #35145c, transparent 35%),
-        #070914;
-    color: white;
-    min-height: 100vh;
+body{
+    font-family:Arial, sans-serif;
+    background:#070b18;
+    color:white;
+    min-height:100vh;
 }
 
 /* HEADER */
 
-header {
-    padding: 25px 20px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: rgba(5,8,20,0.75);
-    backdrop-filter: blur(12px);
+header{
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#0d1326;
+    border-bottom:1px solid #26304d;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    background: linear-gradient(90deg,#55eaff,#a86cff);
-    -webkit-background-clip: text;
-    color: transparent;
+.logo{
+    font-size:25px;
+    font-weight:bold;
 }
 
-.subtitle {
-    color: #aeb5d1;
-    margin-top: 8px;
+.logo span{
+    color:#4da6ff;
+}
+
+.home-btn{
+    text-decoration:none;
+    color:white;
+    background:#182442;
+    padding:10px 18px;
+    border-radius:12px;
 }
 
 /* HERO */
 
-.hero {
-    text-align: center;
-    padding: 45px 20px 30px;
+.hero{
+    padding:45px 7%;
+    text-align:center;
+    background:linear-gradient(135deg,#101a38,#111d4d);
 }
 
-.hero-icon {
-    font-size: 60px;
-    margin-bottom: 15px;
+.hero h1{
+    font-size:36px;
+    margin-bottom:12px;
 }
 
-.hero h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
+.hero p{
+    color:#b9c5e3;
+    font-size:16px;
 }
 
-.hero h1 span {
-    background: linear-gradient(90deg,#4eeaff,#9b6cff);
-    -webkit-background-clip: text;
-    color: transparent;
+/* CONTAINER */
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
 }
 
-.hero p {
-    color: #aeb5d1;
-    max-width: 650px;
-    margin: auto;
-    line-height: 1.6;
+/* NOTICE */
+
+.notice{
+    background:#151d34;
+    border:1px solid #344263;
+    padding:16px;
+    border-radius:15px;
+    margin-bottom:25px;
+    color:#cbd6ee;
 }
 
-/* MAIN */
+/* TOOLS */
 
-.container {
-    width: 92%;
-    max-width: 1100px;
-    margin: auto;
+.tools{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:30px;
 }
 
-/* CARDS */
-
-.tools {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-    margin: 25px 0 40px;
+.tool{
+    background:#111a31;
+    border:1px solid #293655;
+    padding:22px;
+    border-radius:18px;
+    cursor:pointer;
+    transition:.25s;
 }
 
-.tool-card {
-    padding: 25px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    transition: 0.3s;
-    cursor: pointer;
+.tool:hover{
+    transform:translateY(-5px);
+    border-color:#4da6ff;
 }
 
-.tool-card:hover {
-    transform: translateY(-7px);
-    border-color: #63eaff;
-    box-shadow: 0 15px 40px rgba(75,220,255,0.15);
+.tool-icon{
+    font-size:32px;
+    margin-bottom:10px;
 }
 
-.tool-icon {
-    font-size: 38px;
-    margin-bottom: 12px;
+.tool h3{
+    margin-bottom:7px;
 }
 
-.tool-card h2 {
-    margin-bottom: 8px;
+.tool p{
+    color:#9eabc8;
+    font-size:14px;
 }
 
-.tool-card p {
-    color: #aeb5d1;
-    line-height: 1.5;
+/* CONTENT */
+
+.content{
+    display:none;
 }
 
-.tool-card button {
-    margin-top: 18px;
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(90deg,#27dfff,#8065ff);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+.content.active{
+    display:block;
 }
 
-/* CONTENT BOX */
+/* CHAPTERS */
 
-.content-box {
-    display: none;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 22px;
-    padding: 25px;
-    margin-bottom: 35px;
-    animation: fade 0.3s ease;
+.chapter-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
-.content-box.active {
-    display: block;
+.chapter{
+    background:#10182d;
+    border:1px solid #293655;
+    padding:20px;
+    border-radius:17px;
+    cursor:pointer;
+    transition:.25s;
 }
 
-@keyframes fade {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.chapter:hover{
+    border-color:#4da6ff;
+    transform:translateY(-3px);
 }
 
-.content-box h2 {
-    margin-bottom: 20px;
-    color: #6feaff;
+.chapter-number{
+    color:#4da6ff;
+    font-weight:bold;
+    font-size:14px;
 }
 
-.content-box h3 {
-    margin: 20px 0 10px;
+.chapter h3{
+    margin-top:8px;
 }
 
-.content-box p,
-.content-box li {
-    color: #d2d6e7;
-    line-height: 1.7;
+.chapter p{
+    color:#9eabc8;
+    margin-top:7px;
+    font-size:14px;
 }
 
-.content-box ul {
-    padding-left: 22px;
+/* CHAPTER DETAILS */
+
+.details{
+    display:none;
+    margin-top:25px;
 }
 
-/* CHAPTER */
-
-.chapter {
-    padding: 20px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.05);
-    margin-bottom: 15px;
+.details.active{
+    display:block;
 }
 
-.chapter h3 {
-    color: white;
-    margin-top: 0;
+.details-header{
+    background:#111a31;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #293655;
+    margin-bottom:18px;
 }
 
-.chapter span {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    background: rgba(90,220,255,0.12);
-    color: #69eaff;
-    font-size: 13px;
+.details-header h2{
+    margin-bottom:8px;
+}
+
+.details-header p{
+    color:#aebbd6;
+}
+
+/* STUDY CARDS */
+
+.study-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.study-box{
+    background:#111a31;
+    border:1px solid #293655;
+    border-radius:18px;
+    padding:22px;
+}
+
+.study-box h3{
+    margin-bottom:15px;
+}
+
+.study-box p{
+    color:#b9c5df;
+    line-height:1.6;
+}
+
+.qa{
+    background:#0b1224;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:12px;
+}
+
+.qa strong{
+    color:#65b4ff;
+}
+
+.qa span{
+    display:block;
+    margin-top:7px;
+    color:#d2daf0;
+}
+
+ul{
+    padding-left:20px;
+    color:#c3cde3;
+    line-height:1.8;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:none;
+    padding:11px 17px;
+    border-radius:11px;
+    background:#2376d8;
+    color:white;
+    cursor:pointer;
+    margin:5px;
+    font-size:14px;
+}
+
+.btn:hover{
+    background:#348af0;
 }
 
 /* QUIZ */
 
-.question {
-    margin-bottom: 25px;
+.quiz-question{
+    font-size:20px;
+    margin-bottom:18px;
 }
 
-.option {
-    display: block;
-    padding: 13px;
-    margin-top: 8px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.06);
-    color: #ddd;
+.quiz-options button{
+    display:block;
+    width:100%;
+    text-align:left;
+    margin:9px 0;
+    padding:13px;
+    border-radius:11px;
+    border:1px solid #344263;
+    background:#0b1224;
+    color:white;
+    cursor:pointer;
 }
 
-.answer {
-    color: #65f0b0 !important;
-    border: 1px solid rgba(101,240,176,0.3);
+.quiz-options button:hover{
+    border-color:#4da6ff;
+}
+
+.quiz-result{
+    margin-top:15px;
+    font-size:18px;
 }
 
 /* FLASHCARD */
 
-.flashcard {
-    background: linear-gradient(135deg,#18285d,#30185b);
-    padding: 35px;
-    border-radius: 20px;
-    text-align: center;
-}
-
-.flashcard .question-text {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.flashcard .answer-text {
-    color: #6feaff;
-    font-size: 19px;
-}
-
-/* BACK BUTTON */
-
-.back {
-    display: inline-block;
-    margin: 20px 0;
-    padding: 11px 18px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    background: rgba(255,255,255,0.08);
-}
-
-.back:hover {
-    background: rgba(255,255,255,0.15);
+.flashcard{
+    background:#0b1224;
+    min-height:180px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    font-size:21px;
+    border:1px solid #344263;
+    margin-bottom:15px;
 }
 
 /* FOOTER */
 
-footer {
-    text-align: center;
-    padding: 35px 20px;
-    color: #777f9d;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: 30px;
+footer{
+    text-align:center;
+    padding:35px;
+    margin-top:50px;
+    color:#7e8ba9;
 }
 
-@media(max-width:600px) {
+/* MOBILE */
 
-    .hero h1 {
-        font-size: 29px;
+@media(max-width:700px){
+
+    .tools{
+        grid-template-columns:1fr;
     }
 
-    .hero-icon {
-        font-size: 48px;
+    .chapter-grid{
+        grid-template-columns:1fr;
     }
 
-    .tool-card {
-        padding: 20px;
+    .study-grid{
+        grid-template-columns:1fr;
     }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    header{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Study_net</div>
-    <div class="subtitle">Learn • Practice • Grow</div>
+
+    <div class="logo">
+        Study<span>.net</span>
+    </div>
+
+    <a href="index.html" class="home-btn">
+        🏠 Home
+    </a>
+
 </header>
+
 
 <section class="hero">
 
-    <div class="hero-icon">🌍</div>
-
-    <h1>Class 8 <span>Social Science</span></h1>
+    <h1>🌍 Class 8 Social Science</h1>
 
     <p>
-        Explore History, Geography, Civics and Economics
-        with notes, quizzes, flashcards and quick revision.
+        Chapters • Questions & Answers • Quiz • Flashcards • Notes • Revision
     </p>
 
 </section>
 
+
 <main class="container">
 
-    <a href="index.html" class="back">← Back to Home</a>
+<div class="notice">
 
-    <!-- TOOLS -->
+    📚 <strong>Class 8 Social Science</strong><br><br>
 
-    <div class="tools">
+    Choose a chapter below. Each chapter includes
+    practice questions and answers, quiz, flashcards,
+    quick notes and quick revision.
 
-        <div class="tool-card" onclick="showSection('chapters')">
-            <div class="tool-icon">📚</div>
-            <h2>Chapters</h2>
-            <p>Study your Social Science chapters.</p>
-            <button>Open Chapters →</button>
-        </div>
+</div>
 
-        <div class="tool-card" onclick="showSection('quiz')">
-            <div class="tool-icon">📝</div>
-            <h2>Quiz</h2>
-            <p>Test your Social Science knowledge.</p>
-            <button>Start Quiz →</button>
-        </div>
 
-        <div class="tool-card" onclick="showSection('flashcards')">
-            <div class="tool-icon">🃏</div>
-            <h2>Flashcards</h2>
-            <p>Learn important facts quickly.</p>
-            <button>Open Cards →</button>
-        </div>
+<!-- MAIN TOOLS -->
 
-        <div class="tool-card" onclick="showSection('notes')">
-            <div class="tool-icon">⚡</div>
-            <h2>Quick Notes</h2>
-            <p>Short and easy notes for revision.</p>
-            <button>View Notes →</button>
-        </div>
+<div class="tools">
 
-        <div class="tool-card" onclick="showSection('revision')">
-            <div class="tool-icon">🔄</div>
-            <h2>Quick Revision</h2>
-            <p>Revise important points before your exam.</p>
-            <button>Revise Now →</button>
-        </div>
+    <div class="tool" onclick="showContent('chapters')">
+        <div class="tool-icon">📚</div>
+        <h3>Chapters</h3>
+        <p>View all Class 8 Social Science chapters.</p>
+    </div>
 
-        <div class="tool-card" onclick="showSection('questions')">
-            <div class="tool-icon">💡</div>
-            <h2>Important Questions</h2>
-            <p>Practice questions from the chapter.</p>
-            <button>View Questions →</button>
-        </div>
+    <div class="tool" onclick="showContent('questions')">
+        <div class="tool-icon">📝</div>
+        <h3>Questions & Answers</h3>
+        <p>Practice important questions.</p>
+    </div>
+
+    <div class="tool" onclick="showContent('quiz')">
+        <div class="tool-icon">🧠</div>
+        <h3>Quiz</h3>
+        <p>Test your knowledge.</p>
+    </div>
+
+    <div class="tool" onclick="showContent('flashcards')">
+        <div class="tool-icon">🃏</div>
+        <h3>Flashcards</h3>
+        <p>Quick question and answer revision.</p>
+    </div>
+
+    <div class="tool" onclick="showContent('notes')">
+        <div class="tool-icon">⚡</div>
+        <h3>Quick Notes</h3>
+        <p>Short and easy notes.</p>
+    </div>
+
+    <div class="tool" onclick="showContent('revision')">
+        <div class="tool-icon">🔄</div>
+        <h3>Quick Revision</h3>
+        <p>Revise important points quickly.</p>
+    </div>
+
+</div>
+
+
+<!-- CHAPTERS -->
+
+<section id="chapters" class="content active">
+
+    <div class="details-header">
+
+        <h2>📚 Class 8 Social Science Chapters</h2>
+
+        <p>
+            Click any chapter to open its study material.
+        </p>
 
     </div>
 
 
-    <!-- CHAPTERS -->
+    <div class="chapter-grid">
 
-    <section id="chapters" class="content-box">
+        <div class="chapter" onclick="openChapter(1)">
+            <div class="chapter-number">CHAPTER 1</div>
+            <h3>Natural Resources and Their Use</h3>
+            <p>Resources and sustainable use</p>
+        </div>
 
-        <h2>📚 Social Science Chapters</h2>
+        <div class="chapter" onclick="openChapter(2)">
+            <div class="chapter-number">CHAPTER 2</div>
+            <h3>Reshaping India's Political Map</h3>
+            <p>Political changes in India</p>
+        </div>
 
-        <div class="chapter">
+        <div class="chapter" onclick="openChapter(3)">
+            <div class="chapter-number">CHAPTER 3</div>
+            <h3>The Rise of the Marathas</h3>
+            <p>Maratha power and history</p>
+        </div>
 
-            <h3>🏰 The Delhi Sultanate</h3>
+        <div class="chapter" onclick="openChapter(4)">
+            <div class="chapter-number">CHAPTER 4</div>
+            <h3>The Colonial Era in India</h3>
+            <p>Colonial rule and its impact</p>
+        </div>
 
-            <p>
-                The Delhi Sultanate ruled large parts of the Indian
-                subcontinent from 1206 to 1526.
-            </p>
+        <div class="chapter" onclick="openChapter(5)">
+            <div class="chapter-number">CHAPTER 5</div>
+            <h3>Universal Franchise and India's Electoral System</h3>
+            <p>Voting and elections</p>
+        </div>
 
-            <span>History</span>
+        <div class="chapter" onclick="openChapter(6)">
+            <div class="chapter-number">CHAPTER 6</div>
+            <h3>The Parliamentary System: Legislature and Executive</h3>
+            <p>Parliament and government</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(7)">
+            <div class="chapter-number">CHAPTER 7</div>
+            <h3>Factors of Production</h3>
+            <p>Land, labour, capital and enterprise</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(8)">
+            <div class="chapter-number">CHAPTER 8</div>
+            <h3>World Geography: Some Glimpses</h3>
+            <p>Geography of the world</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(9)">
+            <div class="chapter-number">CHAPTER 9</div>
+            <h3>India's Long Road to Independence</h3>
+            <p>India's freedom struggle</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(10)">
+            <div class="chapter-number">CHAPTER 10</div>
+            <h3>A Journey Through Indian Architecture</h3>
+            <p>Indian architecture</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(11)">
+            <div class="chapter-number">CHAPTER 11</div>
+            <h3>The Role of the Judiciary in Our Society</h3>
+            <p>Courts and justice</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(12)">
+            <div class="chapter-number">CHAPTER 12</div>
+            <h3>Citizenship: Rights and Duties</h3>
+            <p>Citizenship and responsibilities</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(13)">
+            <div class="chapter-number">CHAPTER 13</div>
+            <h3>Dynamics of Population</h3>
+            <p>Population and change</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(14)">
+            <div class="chapter-number">CHAPTER 14</div>
+            <h3>India's Urban Landscape</h3>
+            <p>Cities and urbanisation</p>
+        </div>
+
+        <div class="chapter" onclick="openChapter(15)">
+            <div class="chapter-number">CHAPTER 15</div>
+            <h3>Cultural Currents: 13th to 17th Centuries</h3>
+            <p>Culture and society</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CHAPTER DETAILS -->
+
+<div id="chapterDetails" class="details">
+
+    <div class="details-header">
+
+        <h2 id="chapterTitle"></h2>
+
+        <p id="chapterDescription"></p>
+
+        <button class="btn" onclick="backToChapters()">
+            ← Back to Chapters
+        </button>
+
+    </div>
+
+
+    <div class="study-grid">
+
+        <!-- QUESTIONS -->
+
+        <div class="study-box">
+
+            <h3>📝 Questions & Answers</h3>
+
+            <div id="chapterQA"></div>
 
         </div>
 
-        <div class="chapter">
 
-            <h3>👑 Important Dynasties</h3>
+        <!-- QUICK NOTES -->
 
-            <ul>
-                <li>Mamluk (Slave) Dynasty</li>
-                <li>Khalji Dynasty</li>
-                <li>Tughlaq Dynasty</li>
-                <li>Sayyid Dynasty</li>
-                <li>Lodi Dynasty</li>
-            </ul>
+        <div class="study-box">
 
-            <span>History</span>
+            <h3>⚡ Quick Notes</h3>
 
-        </div
+            <div id="chapterNotes"></div>
+
+        </div>
+
+
+        <!-- REVISION -->
+
+        <div class="study-box">
+
+            <h3>🔄 Quick Revision</h3>
+
+            <div id="chapterRevision"></div>
+
+        </div>
+
+
+        <!-- FLASHCARDS -->
+
+        <div class="study-box">
+
+            <h3>🃏 Flashcards</h3>
+
+            <div class="flashcard" id="flashcardText">
+                Click the button to start.
+            </div>
+
+            <button class="btn" onclick="nextFlashcard()">
+                Next Card →
+            </button>
+
+        </div>
+
+
+        <!-- QUIZ -->
+
+        <div class="study-box">
+
+            <h3>🧠 Chapter Quiz</h3>
+
+            <div id="quizQuestion" class="quiz-question"></div>
+
+            <div id="quizOptions" class="quiz-options"></div>
+
+            <div id="quizResult" class="quiz-result"></div>
+
+            <button class="btn" onclick="nextQuiz()">
+                Next Question →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GENERAL QUESTIONS -->
+
+<section id="questions" class="content">
+
+    <div class="details-header">
+
+        <h2>📝 Questions & Answers</h2>
+
+        <p>Practice questions from different Social Science topics.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <div class="qa">
+            <strong>Q1. What are natural resources?</strong>
+            <span>
+                Natural resources are materials and features obtained from nature
+                that people use for their needs.
+            </span>
+        </div>
+
+        <div class="qa">
+            <strong>Q2. What is universal adult franchise?</strong>
+            <span>
+                It means eligible adult citizens have the right to vote
+                without discrimination based on social or economic status.
+            </span>
+        </div>
+
+        <div class="qa">
+            <strong>Q3. What are the main factors of production?</strong>
+            <span>
+                Land, labour, capital and entrepreneurship are commonly
+                identified as factors of production.
+            </span>
+        </div>
+
+        <div class="qa">
+            <strong>Q4. What is a judiciary?</strong>
+            <span>
+                The judiciary is the system of courts that interprets laws
+                and provides justice according to the Constitution and laws.
+            </span>
+        </div>
+
+        <div class="qa">
+            <strong>Q5. What is urbanisation?</strong>
+            <span>
+                Urbanisation is the growth of towns and cities and the increasing
+                share of people living in urban areas.
+            </span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GENERAL QUIZ -->
+
+<section id="quiz" class="content">
+
+    <div class="details-header">
+
+        <h2>🧠 Social Science Quick Quiz</h2>
+
+        <p>Try these questions.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <div class="qa">
+            <strong>Question 1</strong>
+            <span>Which institution makes laws at the national level in India?</span>
+            <br>
+            <button class="btn" onclick="alert('Answer: Parliament')">
+                Show Answer
+            </button>
+        </div>
+
+        <div class="qa">
+            <strong>Question 2</strong>
+            <span>Which factor of production includes human effort?</span>
+            <br>
+            <button class="btn" onclick="alert('Answer: Labour')">
+                Show Answer
+            </button>
+        </div>
+
+        <div class="qa">
+            <strong>Question 3</strong>
+            <span>What is the right to vote called in an electoral system?</span>
+            <br>
+            <button class="btn" onclick="alert('Answer: Franchise')">
+                Show Answer
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FLASHCARDS -->
+
+<section id="flashcards" class="content">
+
+    <div class="details-header">
+
+        <h2>🃏 Social Science Flashcards</h2>
+
+        <p>Use these for quick revision.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <div class="flashcard" id="generalFlashcard">
+            What is the capital of India?
+        </div>
+
+        <button class="btn" onclick="showGeneralAnswer()">
+            Show Answer
+        </button>
+
+        <button class="btn" onclick="nextGeneralCard()">
+            Next →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes" class="content">
+
+    <div class="details-header">
+
+        <h2>⚡ Quick Notes</h2>
+
+        <p>Short points for fast study.</p>
+
+    </div>
+
+    <div class="study-grid">
+
+        <div class="study-box">
+            <h3>🌱 Resources</h3>
+            <p>
+                Natural resources come from nature. They may be renewable
+                or non-renewable and should be used carefully.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>🗳️ Elections</h3>
+            <p>
+                Elections allow citizens to choose representatives.
+                Voting is an important part of democratic participation.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>🏛️ Government</h3>
+            <p>
+                The legislature makes laws and the executive implements
+                government decisions.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>⚖️ Judiciary</h3>
+            <p>
+                Courts interpret laws, settle disputes and protect
+                constitutional principles.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REVISION -->
+
+<section id="revision" class="content">
+
+    <div class="details-header">
+
+        <h2>🔄 Quick Revision</h2>
+
+        <p>Remember these important ideas.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <ul>
+
+            <li>Natural resources are obtained from nature.</li>
+
+            <li>Resources should be used sustainably.</li>
+
+            <li>India has a democratic electoral system.</li>
+
+            <li>Citizens participate in democracy through voting.</li>
+
+            <li>The Parliament is the national legislature.</li>
+
+            <li>The executive carries out government policies and laws.</li>
+
+            <li>Land, labour, capital and entrepreneurship are factors of production.</li>
+
+            <li>The judiciary is an important organ of government.</li>
+
+            <li>Population changes through births, deaths and migration.</li>
+
+            <li>Urbanisation is associated with the growth of towns and cities.</li>
+
+            <li>India has a rich and diverse architectural heritage.</li>
+
+            <li>India's freedom struggle involved many people and movements.</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    © 2026 Study.net • Learn • Practice • Grow 📚
+
+</footer>
+
+
+<script>
+
+/* ================================
+   CHAPTER DATA
+================================ */
+
+const chapters = {
+
+1:{
+title:"Natural Resources and Their Use",
+description:"Understanding natural resources and their responsible use.",
+qa:[
+["What are natural resources?","Resources that are obtained from nature and used by people."],
+["Why should resources be conserved?","Because many resources are limited and need to be available for future generations."],
+["What is sustainable use?","Using resources in a way that meets present needs while protecting their future availability."]
+],
+notes:[
+"Natural resources come from nature.",
+"Some resources can be renewed naturally.",
+"Some resources are limited.",
+"Conservation helps protect resources.",
+"Sustainable use balances human needs and environmental protection."
+],
+revision:[
+"Natural resources → resources from nature.",
+"Conservation → careful protection and use.",
+"Sustainable use → use without destroying future availability."
+],
+flash:[
+["What are natural resources?","Resources obtained from nature."],
+["What is conservation?","Careful protection and use of resources."],
+["What is sustainable use?","Using resources responsibly for present and future needs."]
+],
+quiz:[
+["Which are obtained from nature?","Natural resources",["Natural resources","Factories","Machines","Buildings"]],
+["Why conserve resources?","For present and future needs",["Only for today","For present and future needs","To waste them","To remove them"]]
+]
+},
+
+2:{
+title:"Reshaping India's Political Map",
+description:"Political changes and the changing organisation of territories in India.",
+qa:[
+["What is a political map?","A map showing political boundaries such as countries, states and territories."],
+["Why can political maps change?","Because territories, governments and administrative boundaries can change over time."],
+["What does political reorganisation mean?","Changing administrative or political boundaries and arrangements."]
+],
+notes:[
+"Political maps show administrative boundaries.",
+"India's political organisation has changed over time.",
+"States and territories can be reorganised.",
+"Political boundaries are different from physical features."
+],
+revision:[
+"Political map → shows political boundaries.",
+"Reorganisation → changes in administrative arrangements.",
+"Political boundaries can change over time."
+],
+<!-- FLASHCARDS -->
+
+<section id="flashcards" class="content">
+
+    <div class="details-header">
+
+        <h2>🃏 Social Science Flashcards</h2>
+
+        <p>Use these for quick revision.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <div class="flashcard" id="generalFlashcard">
+            What is the capital of India?
+        </div>
+
+        <button class="btn" onclick="showGeneralAnswer()">
+            Show Answer
+        </button>
+
+        <button class="btn" onclick="nextGeneralCard()">
+            Next →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK NOTES -->
+
+<section id="notes" class="content">
+
+    <div class="details-header">
+
+        <h2>⚡ Quick Notes</h2>
+
+        <p>Short points for fast study.</p>
+
+    </div>
+
+    <div class="study-grid">
+
+        <div class="study-box">
+            <h3>🌱 Resources</h3>
+            <p>
+                Natural resources come from nature. They may be renewable
+                or non-renewable and should be used carefully.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>🗳️ Elections</h3>
+            <p>
+                Elections allow citizens to choose representatives.
+                Voting is an important part of democratic participation.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>🏛️ Government</h3>
+            <p>
+                The legislature makes laws and the executive implements
+                government decisions.
+            </p>
+        </div>
+
+        <div class="study-box">
+            <h3>⚖️ Judiciary</h3>
+            <p>
+                Courts interpret laws, settle disputes and protect
+                constitutional principles.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK REVISION -->
+
+<section id="revision" class="content">
+
+    <div class="details-header">
+
+        <h2>🔄 Quick Revision</h2>
+
+        <p>Remember these important points.</p>
+
+    </div>
+
+    <div class="study-box">
+
+        <ul>
+
+            <li>Natural resources are obtained from nature.</li>
+
+            <li>Resources should be used sustainably.</li>
+
+            <li>India has a democratic electoral system.</li>
+
+            <li>Citizens participate in democracy through voting.</li>
+
+            <li>The Parliament is the national legislature.</li>
+
+            <li>The executive carries out government policies and laws.</li>
+
+            <li>Land, labour, capital and entrepreneurship are factors of production.</li>
+
+            <li>The judiciary is an important organ of government.</li>
+
+            <li>Population changes through births, deaths and migration.</li>
+
+            <li>Urbanisation is associated with the growth of towns and cities.</li>
+
+            <li>India has a rich and diverse architectural heritage.</li>
+
+            <li>India's freedom struggle involved many people and movements.</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    © 2026 Study.net • Learn • Practice • Grow 📚
+
+</footer>
+
+
+<script>
+
+/* GENERAL FLASHCARDS */
+
+const generalCards = [
+
+    ["What is the capital of India?", "New Delhi"],
+
+    ["What is the right to vote called?", "Franchise"],
+
+    ["What is human effort in production called?", "Labour"],
+
+    ["What organ includes courts?", "Judiciary"],
+
+    ["What is population density?", "People per unit area"]
+
+];
+
+let generalIndex = 0;
+
+
+function showGeneralAnswer(){
+
+    document.getElementById("generalFlashcard").innerText =
+        generalCards[generalIndex][1];
+
+}
+
+
+function nextGeneralCard(){
+
+    generalIndex++;
+
+    if(generalIndex >= generalCards.length){
+
+        generalIndex = 0;
+
+    }
+
+    document.getElementById("generalFlashcard").innerText =
+        generalCards[generalIndex][0];
+
+}
+
+
+/* CHAPTER FLASHCARDS */
+
+let flashIndex = 0;
+
+function nextFlashcard(){
+
+    if(!currentChapter){
+
+        return;
+
+    }
+
+    flashIndex++;
+
+    if(flashIndex >= currentChapter.flash.length){
+
+        flashIndex = 0;
+
+    }
+
+    document.getElementById("flashcardText").innerText =
+        currentChapter.flash[flashIndex][0];
+
+}
+
+
+/* CHAPTER QUIZ */
+
+let quizIndex = 0;
+
+function loadQuiz(){
+
+    if(!currentChapter){
+
+        return;
+
+    }
+
+    const question =
+        currentChapter.quiz[quizIndex];
+
+    document.getElementById("quizQuestion").innerText =
+        "Q. " + question[0];
+
+    document.getElementById("quizResult").innerText = "";
+
+    let optionsHTML = "";
+
+    question[2].forEach(function(option){
+
+        optionsHTML += `
+            <button onclick="checkAnswer('${option.replace(/'/g,"\\'")}')">
+                ${option}
+            </button>
+        `;
+
+    });
+
+    document.getElementById("quizOptions").innerHTML =
+        optionsHTML;
+
+}
+
+
+function checkAnswer(answer){
+
+    const correct =
+        currentChapter.quiz[quizIndex][1];
+
+    if(answer === correct){
+
+        document.getElementById("quizResult").innerText =
+            "✅ Correct!";
+
+    }else{
+
+        document.getElementById("quizResult").innerText =
+            "❌ Correct answer: " + correct;
+
+    }
+
+}
+
+
+function nextQuiz(){
+
+    if(!currentChapter){
+
+        return;
+
+    }
+
+    quizIndex++;
+
+    if(quizIndex >= currentChapter.quiz.length){
+
+        quizIndex = 0;
+
+    }
+
+    loadQuiz();
+
+}
+
+</script>
+
+</body>
+
+</html>
