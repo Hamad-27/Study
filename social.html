@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Social Science | Study_net</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #18235c, transparent 35%),
+        radial-gradient(circle at bottom right, #35145c, transparent 35%),
+        #070914;
+    color: white;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(5,8,20,0.75);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(90deg,#55eaff,#a86cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #aeb5d1;
+    margin-top: 8px;
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 45px 20px 30px;
+}
+
+.hero-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg,#4eeaff,#9b6cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #aeb5d1;
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* MAIN */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* CARDS */
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin: 25px 0 40px;
+}
+
+.tool-card {
+    padding: 25px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.tool-card:hover {
+    transform: translateY(-7px);
+    border-color: #63eaff;
+    box-shadow: 0 15px 40px rgba(75,220,255,0.15);
+}
+
+.tool-icon {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.tool-card h2 {
+    margin-bottom: 8px;
+}
+
+.tool-card p {
+    color: #aeb5d1;
+    line-height: 1.5;
+}
+
+.tool-card button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg,#27dfff,#8065ff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* CONTENT BOX */
+
+.content-box {
+    display: none;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    padding: 25px;
+    margin-bottom: 35px;
+    animation: fade 0.3s ease;
+}
+
+.content-box.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-box h2 {
+    margin-bottom: 20px;
+    color: #6feaff;
+}
+
+.content-box h3 {
+    margin: 20px 0 10px;
+}
+
+.content-box p,
+.content-box li {
+    color: #d2d6e7;
+    line-height: 1.7;
+}
+
+.content-box ul {
+    padding-left: 22px;
+}
+
+/* CHAPTER */
+
+.chapter {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 15px;
+}
+
+.chapter h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.chapter span {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(90,220,255,0.12);
+    color: #69eaff;
+    font-size: 13px;
+}
+
+/* QUIZ */
+
+.question {
+    margin-bottom: 25px;
+}
+
+.option {
+    display: block;
+    padding: 13px;
+    margin-top: 8px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    color: #ddd;
+}
+
+.answer {
+    color: #65f0b0 !important;
+    border: 1px solid rgba(101,240,176,0.3);
+}
+
+/* FLASHCARD */
+
+.flashcard {
+    background: linear-gradient(135deg,#18285d,#30185b);
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.flashcard .question-text {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.flashcard .answer-text {
+    color: #6feaff;
+    font-size: 19px;
+}
+
+/* BACK BUTTON */
+
+.back {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 11px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,0.08);
+}
+
+.back:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    color: #777f9d;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 30px;
+}
+
+@media(max-width:600px) {
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .hero-icon {
+        font-size: 48px;
+    }
+
+    .tool-card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Study_net</div>
+    <div class="subtitle">Learn • Practice • Grow</div>
+</header>
+
+<section class="hero">
+
+    <div class="hero-icon">🌍</div>
+
+    <h1>Class 8 <span>Social Science</span></h1>
+
+    <p>
+        Explore History, Geography, Civics and Economics
+        with notes, quizzes, flashcards and quick revision.
+    </p>
+
+</section>
+
+<main class="container">
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+    <!-- TOOLS -->
+
+    <div class="tools">
+
+        <div class="tool-card" onclick="showSection('chapters')">
+            <div class="tool-icon">📚</div>
+            <h2>Chapters</h2>
+            <p>Study your Social Science chapters.</p>
+            <button>Open Chapters →</button>
+        </div>
+
+        <div class="tool-card" onclick="showSection('quiz')">
+            <div class="tool-icon">📝</div>
+            <h2>Quiz</h2>
+            <p>Test your Social Science knowledge.</p>
+            <button>Start Quiz →</button>
+        </div>
+
+        <div class="tool-card" onclick="showSection('flashcards')">
+            <div class="tool-icon">🃏</div>
+            <h2>Flashcards</h2>
+            <p>Learn important facts quickly.</p>
+            <button>Open Cards →</button>
+        </div>
+
+        <div class="tool-card" onclick="showSection('notes')">
+            <div class="tool-icon">⚡</div>
+            <h2>Quick Notes</h2>
+            <p>Short and easy notes for revision.</p>
+            <button>View Notes →</button>
+        </div>
+
+        <div class="tool-card" onclick="showSection('revision')">
+            <div class="tool-icon">🔄</div>
+            <h2>Quick Revision</h2>
+            <p>Revise important points before your exam.</p>
+            <button>Revise Now →</button>
+        </div>
+
+        <div class="tool-card" onclick="showSection('questions')">
+            <div class="tool-icon">💡</div>
+            <h2>Important Questions</h2>
+            <p>Practice questions from the chapter.</p>
+            <button>View Questions →</button>
+        </div>
+
+    </div>
+
+
+    <!-- CHAPTERS -->
+
+    <section id="chapters" class="content-box">
+
+        <h2>📚 Social Science Chapters</h2>
+
+        <div class="chapter">
+
+            <h3>🏰 The Delhi Sultanate</h3>
+
+            <p>
+                The Delhi Sultanate ruled large parts of the Indian
+                subcontinent from 1206 to 1526.
+            </p>
+
+            <span>History</span>
+
+        </div>
+
+        <div class="chapter">
+
+            <h3>👑 Important Dynasties</h3>
+
+            <ul>
+                <li>Mamluk (Slave) Dynasty</li>
+                <li>Khalji Dynasty</li>
+                <li>Tughlaq Dynasty</li>
+                <li>Sayyid Dynasty</li>
+                <li>Lodi Dynasty</li>
+            </ul>
+
+            <span>History</span>
+
+        </div
