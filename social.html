@@ -1226,6 +1226,18 @@ function nextQuiz(){
 
 }
 
+    function showContent(id) {
+    document.querySelectorAll(".content").forEach(function(section) {
+        section.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    document.getElementById(id).scrollIntoView({
+        behavior: "smooth"
+    });
+    }
+
 </script>
 
 </body>
