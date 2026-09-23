@@ -1072,6 +1072,31 @@ button:hover,
 a:hover {
   transform: translateY(-2px);
 }
+
+ /* ================= STUDY TOOLS GRID ================= */
+
+.study-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.study-tools-grid .study-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+/* Tablet / phone */
+@media (max-width: 800px) {
+  .study-tools-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+}
 </style>
 </head>
  <body>
@@ -1386,6 +1411,7 @@ document.getElementById("studentForm").addEventListener("submit", function(event
 
 
 <main>
+ <div class="study-tools-grid">
  <div class="study-card">
   <div class="card-icon">🧠</div>
 
