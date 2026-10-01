@@ -1,1 +1,424 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 8 Science | Study.net</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial,sans-serif;
+  background:#0b1020;
+  color:#f5f7ff;
+  min-height:100vh;
+}
+header{
+  background:#151d35;
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #293454;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.logo{font-size:23px;font-weight:bold;color:#8b9cff}
+.logo span{color:#fff}
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:bold;
+  background:#7865ff;
+  color:white;
+}
+button:hover{opacity:.85}
+.back{background:#293454}
+.container{max-width:1100px;margin:auto;padding:22px}
+.hero{
+  background:linear-gradient(135deg,#24265a,#493b9b);
+  padding:30px;
+  border-radius:20px;
+  margin-bottom:22px;
+}
+.hero h1{font-size:30px;margin-bottom:10px}
+.hero p{color:#d6d8ff;line-height:1.6}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+.stat{
+  background:#171f38;
+  padding:17px;
+  border-radius:13px;
+  text-align:center;
+}
+.stat strong{display:block;font-size:23px;color:#a99aff}
+.stat small{color:#aab3d0}
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+  margin:22px 0;
+}
+.menu button{
+  background:#192440;
+  border:1px solid #354365;
+  min-height:95px;
+  font-size:16px;
+  text-align:left;
+  line-height:1.7;
+}
+.menu button:hover{background:#302d65}
+.panel{
+  background:#151d35;
+  border:1px solid #293454;
+  padding:22px;
+  border-radius:17px;
+  margin-bottom:20px;
+}
+.panel h2{margin-bottom:17px;color:#b8adff}
+.card{
+  background:#202b48;
+  padding:17px;
+  border-radius:12px;
+  margin:11px 0;
+  border:1px solid #344363;
+}
+.card h3{margin-bottom:9px}
+.card p{line-height:1.7;color:#d0d8ec}
+.chapter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.chapter button{white-space:nowrap}
+.hidden{display:none!important}
+.answer{
+  display:none;
+  margin-top:12px;
+  padding:13px;
+  background:#172b36;
+  border-left:3px solid #50d6a0;
+  border-radius:8px;
+  line-height:1.6;
+}
+.options button{
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:9px 0;
+  background:#293454;
+}
+.options button.correct{background:#16794d}
+.options button.wrong{background:#a43848}
+#feedback{margin-top:15px;font-weight:bold}
+.progress{
+  background:#303b59;
+  height:9px;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+#progressBar{
+  height:100%;
+  width:0;
+  background:#70e0ad;
+  transition:width .3s;
+}
+footer{text-align:center;padding:25px;color:#8490ac}
+@media(max-width:650px){
+  .menu{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:25px}
+  .container{padding:13px}
+  .stats{gap:7px}
+  .stat{padding:12px 5px}
+  .chapter{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Study<span>.net</span> 📚</div>
+  <button class="back" onclick="goHome()">← Home</button>
+</header>
+
+<div class="container">
+
+<section class="hero">
+  <h1>🔬 Class 8 Science</h1>
+  <p>Explore science, learn new concepts, practise questions and test your knowledge!</p>
+
+  <div class="stats">
+    <div class="stat"><strong id="completed">0</strong><small>Lessons Done</small></div>
+    <div class="stat"><strong id="score">0</strong><small>Quiz Points</small></div>
+    <div class="stat"><strong id="total">18</strong><small>Chapters</small></div>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <small id="progressText">Your learning progress: 0%</small>
+</section>
+
+<div class="menu">
+  <button onclick="show('chapters')">📚<br>Chapters</button>
+  <button onclick="show('questions')">📝<br>Questions & Answers</button>
+  <button onclick="show('quiz')">🧠<br>Smart Quiz</button>
+  <button onclick="show('flashcards')">🃏<br>Flashcards</button>
+  <button onclick="show('notes')">⚡<br>Quick Notes</button>
+  <button onclick="show('revision')">🔄<br>Quick Revision</button>
+</div>
+
+<section id="chapters" class="panel">
+<h2>📚 Science Chapters</h2>
+<div id="chapterList"></div>
+</section>
+
+<section id="study" class="panel hidden">
+<button class="back" onclick="show('chapters')">← Back to Chapters</button>
+<h2 id="studyTitle" style="margin-top:20px"></h2>
+<div id="studyContent"></div>
+<button onclick="completeChapter()" style="margin-top:18px">✓ Mark Lesson Completed</button>
+</section>
+
+<section id="questions" class="panel hidden">
+<h2>📝 Questions & Answers</h2>
+<div id="qaList"></div>
+</section>
+
+<section id="quiz" class="panel hidden">
+<h2>🧠 Smart Science Quiz</h2>
+<p id="quizCount"></p>
+<div class="card">
+<h3 id="question"></h3>
+<div id="options" class="options"></div>
+<p id="feedback"></p>
+<button id="nextBtn" class="hidden" onclick="nextQuestion()">Next Question →</button>
+</div>
+</section>
+
+<section id="flashcards" class="panel hidden">
+<h2>🃏 Science Flashcards</h2>
+<div class="card" style="text-align:center;padding:35px 15px">
+<p id="flashNumber"></p>
+<h2 id="flashQuestion" style="color:white;margin:25px 0"></h2>
+<p id="flashAnswer" class="hidden" style="color:#70e0ad"></p>
+<button onclick="flipCard()">Flip Card</button>
+<button onclick="nextFlash()" class="back">Next →</button>
+</div>
+</section>
+
+<section id="notes" class="panel hidden">
+<h2>⚡ Quick Notes</h2>
+<div id="notesList"></div>
+</section>
+
+<section id="revision" class="panel hidden">
+<h2>🔄 Quick Revision</h2>
+<div id="revisionList"></div>
+</section>
+
+</div>
+
+<footer>Made with ❤️ for learners | Study.net</footer>
+
+<script>
+const chapters=[
+["Crop Production and Management","Agriculture is the practice of growing crops. Main steps include preparation of soil, sowing, adding manure and fertilisers, irrigation, weeding, harvesting and storage.","Kharif crops are grown during the rainy season. Rabi crops are grown during winter. Examples: rice is a Kharif crop and wheat is a Rabi crop.","What is irrigation?","The artificial supply of water to crops at regular intervals is called irrigation."],
+["Microorganisms: Friend and Foe","Microorganisms are tiny living organisms seen with a microscope. They include bacteria, fungi, protozoa and some algae.","Useful microorganisms help in making curd, bread, medicines and decomposing waste. Some cause diseases.","What is fermentation?","The conversion of sugar into alcohol or acids by microorganisms is called fermentation."],
+["Synthetic Fibres and Plastics","Synthetic fibres are man-made fibres. Examples include nylon, polyester and acrylic.","Plastics are lightweight and durable. Many plastics are non-biodegradable, so reduce, reuse and recycle them.","What is a polymer?","A polymer is a large molecule made of repeating smaller units."],
+["Materials: Metals and Non-Metals","Metals are generally lustrous, malleable, ductile and good conductors of heat and electricity.","Non-metals are generally poor conductors. Exceptions include graphite, which conducts electricity.","What is malleability?","The ability of a material to be beaten into thin sheets."],
+["Coal and Petroleum","Coal and petroleum are fossil fuels formed from the remains of ancient organisms over millions of years.","They are exhaustible natural resources. Petroleum refining separates useful products such as petrol, diesel and kerosene.","What is a fossil fuel?","A fuel formed from the remains of ancient living organisms."],
+["Combustion and Flame","Combustion is a chemical process in which a substance reacts with oxygen and releases heat, usually with light.","The three conditions for fire are fuel, oxygen and sufficient ignition temperature.","What is ignition temperature?","The lowest temperature at which a substance catches fire."],
+["Conservation of Plants and Animals","Deforestation means large-scale cutting of forests. It can cause soil erosion, floods and loss of biodiversity.","National parks, wildlife sanctuaries and biosphere reserves help conserve nature.","What is biodiversity?","The variety of living organisms in an area."],
+["Cell: Structure and Functions","The cell is the basic structural and functional unit of life.","The nucleus controls cell activities. The cell membrane controls movement of substances. Plant cells have a cell wall and chloroplasts.","What is the function of the nucleus?","It controls the activities of the cell and contains genetic material."],
+["Reproduction in Animals","Reproduction is the process by which living organisms produce young ones.","Fertilisation is the fusion of male and female gametes. It may be internal or external.","What is a zygote?","The single cell formed after fertilisation."],
+["Reaching the Age of Adolescence","Adolescence is the period of life when the body undergoes changes leading towards adulthood.","Hormones control many changes during puberty. A balanced diet, exercise and hygiene are important.","What are hormones?","Chemical messengers produced by endocrine glands."],
+["Force and Pressure","A force is a push or pull. It can change an object's speed, direction or shape.","Pressure is force acting per unit area. SI unit of force is newton (N).","What is pressure?","Pressure = Force ÷ Area."],
+["Friction","Friction is a force that opposes relative motion between surfaces in contact.","Friction helps us walk and write. Lubricants, wheels and ball bearings can reduce friction.","What is rolling friction?","The friction acting when an object rolls over a surface."],
+["Sound","Sound is produced by vibrating objects and travels through a medium as waves.","Sound cannot travel through a vacuum. Frequency determines pitch and amplitude is related to loudness.","What is frequency?","The number of vibrations per second, measured in hertz (Hz)."],
+["Chemical Effects of Electric Current","Some liquids conduct electricity. Passing electric current through a conducting liquid can cause chemical changes.","Electroplating is the process of depositing a layer of one metal over another using electricity.","What is electroplating?","Coating an object with a thin layer of another metal using electric current."],
+["Some Natural Phenomena","Lightning is an electrical discharge in the atmosphere. Earthquakes are sudden shaking of the ground.","A lightning conductor helps protect buildings. During an earthquake, move to a safe open area when possible.","What is an earthquake?","Sudden shaking of the Earth's surface due to movement within the Earth."],
+["Light","Light travels in straight lines. Reflection is the bouncing back of light from a surface.","The angle of incidence equals the angle of reflection. The human eye helps us see objects.","State the law of reflection.","Angle of incidence is equal to angle of reflection."],
+["Stars and the Solar System","The Sun is a star at the centre of our solar system. Planets revolve around it.","The Moon is Earth's natural satellite. A constellation is a recognisable pattern of stars.","What is a constellation?","A group of stars forming a recognisable pattern in the sky."],
+["Pollution of Air and Water","Air and water pollution occur when harmful substances contaminate them.","Planting trees, treating wastewater and reducing waste help protect the environment.","What is potable water?","Water that is safe for drinking."]
+];
+
+let completed=JSON.parse(localStorage.getItem("scienceDone")||"[]");
+let points=Number(localStorage.getItem("sciencePoints")||0);
+let currentChapter=0;
+
+function updateProgress(){
+ document.getElementById("completed").textContent=completed.length;
+ document.getElementById("score").textContent=points;
+ document.getElementById("total").textContent=chapters.length;
+ let pct=Math.round(completed.length/chapters.length*100);
+ document.getElementById("progressBar").style.width=pct+"%";
+ document.getElementById("progressText").textContent="Your learning progress: "+pct+"%";
+}
+
+function show(id){
+ document.querySelectorAll(".panel").forEach(x=>x.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderChapters(){
+ document.getElementById("chapterList").innerHTML=chapters.map((c,i)=>`
+ <div class="card chapter">
+ <div><h3>${i+1}. ${c[0]}</h3>
+ <small>${completed.includes(i)?"✅ Completed":"📖 Start learning"}</small></div>
+ <button onclick="openChapter(${i})">Study →</button>
+ </div>`).join("");
+}
+
+function openChapter(i){
+ currentChapter=i;
+ let c=chapters[i];
+ document.getElementById("studyTitle").textContent="📖 "+c[0];
+ document.getElementById("studyContent").innerHTML=`
+ <div class="card"><h3>📘 Learn</h3><p>${c[1]}</p></div>
+ <div class="card"><h3>💡 Important Point</h3><p>${c[2]}</p></div>
+ <div class="card"><h3>📝 Check Your Knowledge</h3><p>${c[3]}</p><div class="answer" style="display:block">${c[4]}</div></div>`;
+ show("study");
+}
+
+function completeChapter(){
+ if(!completed.includes(currentChapter)){
+ completed.push(currentChapter);
+ localStorage.setItem("scienceDone",JSON.stringify(completed));
+ updateProgress();
+ renderChapters();
+ }
+ alert("🎉 Lesson completed! Great work!");
+}
+
+function renderQA(){
+ document.getElementById("qaList").innerHTML=chapters.map((c,i)=>`
+ <div class="card"><h3>${i+1}. ${c[0]}</h3>
+ <p><b>Q:</b> ${c[3]}</p>
+ <button onclick="toggleAnswer(${i})">Show Answer</button>
+ <div class="answer" id="answer${i}">${c[4]}</div></div>`).join("");
+}
+function toggleAnswer(i){
+ let el=document.getElementById("answer"+i);
+ el.style.display=el.style.display==="block"?"none":"block";
+}
+
+const quiz=[
+["What is the SI unit of force?",["Newton","Joule","Watt","Pascal"],0],
+["Which organelle controls cell activities?",["Vacuole","Nucleus","Cell wall","Cytoplasm"],1],
+["Which gas is needed for combustion?",["Nitrogen","Carbon dioxide","Oxygen","Hydrogen"],2],
+["Which is a Kharif crop?",["Wheat","Gram","Rice","Mustard"],2],
+["Which material is a good conductor?",["Rubber","Plastic","Copper","Wood"],2],
+["What is the basic unit of life?",["Tissue","Organ","Cell","Organ system"],2],
+["Which force opposes motion?",["Gravity","Friction","Magnetic force","Muscular force"],1],
+["Sound is produced by?",["Vibrations","Shadows","Reflection","Melting"],0],
+["Which is a fossil fuel?",["Sunlight","Wind","Coal","Water"],2],
+["What is the unit of frequency?",["Newton","Hertz","Metre","Litre"],1],
+["Which part of a plant cell contains chlorophyll?",["Nucleus","Chloroplast","Vacuole","Cell wall"],1],
+["Which process coats an object with metal using electricity?",["Filtration","Evaporation","Electroplating","Condensation"],2],
+["What is the natural satellite of Earth?",["Mars","Sun","Moon","Venus"],2],
+["Which helps reduce friction?",["Rough surface","Lubricant","More load","Less wheels"],1],
+["Which is safe drinking water called?",["Salty water","Potable water","Wastewater","Sea water"],1]
+];
+
+let qi=0,answered=false,quizScore=0;
+function loadQuiz(){
+ answered=false;
+ document.getElementById("quizCount").textContent="Question "+(qi+1)+" of "+quiz.length;
+ document.getElementById("question").textContent=quiz[qi][0];
+ document.getElementById("feedback").textContent="";
+ document.getElementById("nextBtn").classList.add("hidden");
+ document.getElementById("options").innerHTML=quiz[qi][1].map((o,i)=>`<button onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+}
+function answerQuiz(i){
+ if(answered)return;
+ answered=true;
+ let correct=quiz[qi][2];
+ let buttons=document.querySelectorAll("#options button");
+ buttons[correct].classList.add("correct");
+ if(i===correct){
+  quizScore++;
+  points++;
+  localStorage.setItem("sciencePoints",points);
+  document.getElementById("feedback").textContent="✅ Correct! +1 learning point";
+ }else{
+  buttons[i].classList.add("wrong");
+  document.getElementById("feedback").textContent="❌ Correct answer: "+quiz[qi][1][correct];
+ }
+ updateProgress();
+ document.getElementById("nextBtn").textContent=qi===quiz.length-1?"See Results 🏆":"Next Question →";
+ document.getElementById("nextBtn").classList.remove("hidden");
+}
+function nextQuestion(){
+ qi++;
+ if(qi>=quiz.length){
+  document.getElementById("question").textContent="🏆 Quiz Completed!";
+  document.getElementById("options").innerHTML="";
+  document.getElementById("feedback").textContent="Your score: "+quizScore+" / "+quiz.length;
+  document.getElementById("nextBtn").textContent="Try Again";
+  document.getElementById("nextBtn").onclick=()=>{
+   qi=0;quizScore=0;
+   document.getElementById("nextBtn").onclick=nextQuestion;
+   loadQuiz();
+  };
+  return;
+ }
+ loadQuiz();
+}
+
+const flash=[
+["What is force?","A push or pull acting on an object."],
+["What is friction?","A force that opposes relative motion."],
+["What is a cell?","The basic structural and functional unit of life."],
+["What is photosynthesis?","The process by which green plants make food using light."],
+["What is fertilisation?","Fusion of male and female gametes."],
+["What is pressure?","Force acting per unit area."],
+["What is a fossil fuel?","Fuel formed from ancient organic remains."],
+["What is reflection?","Bouncing back of light from a surface."],
+["What is adolescence?","The period of life between childhood and adulthood."],
+["What is electroplating?","Depositing a metal layer using electric current."]
+];
+let fi=0,flipped=false;
+function renderFlash(){
+ document.getElementById("flashNumber").textContent="Card "+(fi+1)+" / "+flash.length;
+ document.getElementById("flashQuestion").textContent=flash[fi][0];
+ document.getElementById("flashAnswer").textContent=flash[fi][1];
+ document.getElementById("flashAnswer").classList.add("hidden");
+ flipped=false;
+}
+function flipCard(){
+ flipped=!flipped;
+ document.getElementById("flashAnswer").classList.toggle("hidden",!flipped);
+}
+function nextFlash(){fi=(fi+1)%flash.length;renderFlash();}
+
+function renderNotes(){
+ document.getElementById("notesList").innerHTML=chapters.map((c,i)=>`
+ <div class="card"><h3>${i+1}. ${c[0]}</h3><p>${c[1]}</p></div>`).join("");
+}
+function renderRevision(){
+ document.getElementById("revisionList").innerHTML=chapters.map((c,i)=>`
+ <div class="card"><h3>${i+1}. ${c[0]}</h3><p>${c[2]}</p></div>`).join("");
+}
+function goHome(){window.location.href="index.html";}
+
+renderChapters();
+renderQA();
+renderNotes();
+renderRevision();
+loadQuiz();
+renderFlash();
+updateProgress();
+</script>
+</body>
+  </html>
+
