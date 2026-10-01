@@ -1,1 +1,406 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 8 English | Study.net</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0b1020;color:#f5f7ff}
+header{background:#151d35;padding:18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;border-bottom:1px solid #293454}
+.logo{font-size:23px;font-weight:bold;color:#8b9cff}
+.logo span{color:white}
+button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;font-weight:bold;background:#7865ff;color:white}
+button:hover{opacity:.85}
+.back{background:#293454}
+.container{max-width:1100px;margin:auto;padding:22px}
+.hero{background:linear-gradient(135deg,#243b65,#6544a4);padding:30px;border-radius:20px;margin-bottom:22px}
+.hero h1{font-size:30px;margin-bottom:10px}
+.hero p{color:#e0e3ff;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.stat{background:#171f38;padding:17px;border-radius:13px;text-align:center}
+.stat strong{display:block;font-size:23px;color:#a99aff}
+.stat small{color:#aab3d0}
+.progress{background:#303b59;height:9px;border-radius:20px;overflow:hidden;margin:12px 0}
+#progressBar{height:100%;width:0;background:#70e0ad;transition:width .3s}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:22px 0}
+.menu button{background:#192440;border:1px solid #354365;min-height:95px;font-size:16px;text-align:left;line-height:1.7}
+.menu button:hover{background:#302d65}
+.panel{background:#151d35;border:1px solid #293454;padding:22px;border-radius:17px;margin-bottom:20px}
+.panel h2{margin-bottom:17px;color:#b8adff}
+.card{background:#202b48;padding:17px;border-radius:12px;margin:11px 0;border:1px solid #344363}
+.card h3{margin-bottom:9px}
+.card p{line-height:1.7;color:#d0d8ec}
+.hidden{display:none!important}
+.answer{display:none;margin-top:12px;padding:13px;background:#172b36;border-left:3px solid #50d6a0;border-radius:8px;line-height:1.7}
+.options button{display:block;width:100%;text-align:left;margin:9px 0;background:#293454}
+.options button.correct{background:#16794d}
+.options button.wrong{background:#a43848}
+#feedback{margin-top:15px;font-weight:bold;line-height:1.6}
+.chapter{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chapter button{white-space:nowrap}
+textarea{width:100%;background:#101a30;color:white;border:1px solid #526184;border-radius:10px;padding:13px;font-size:16px}
+footer{text-align:center;padding:25px;color:#8490ac}
+@media(max-width:650px){.menu{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:25px}.container{padding:13px}.chapter{align-items:flex-start;flex-direction:column}.stats{gap:7px}.stat{padding:12px 5px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Study<span>.net</span> 📚</div>
+<button class="back" onclick="goHome()">← Home</button>
+</header>
+
+<div class="container">
+
+<section class="hero">
+<h1>📖 Class 8 English</h1>
+<p>Read stories, explore poems, improve grammar and practise English every day!</p>
+<div class="stats">
+<div class="stat"><strong id="completed">0</strong><small>Lessons Done</small></div>
+<div class="stat"><strong id="score">0</strong><small>Learning Points</small></div>
+<div class="stat"><strong>4</strong><small>Lessons</small></div>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+<small id="progressText">Your learning progress: 0%</small>
+</section>
+
+<div class="menu">
+<button onclick="show('chapters')">📚<br>Chapters</button>
+<button onclick="show('questions')">📝<br>Questions & Answers</button>
+<button onclick="show('quiz')">🧠<br>Smart Quiz</button>
+<button onclick="show('flashcards')">🃏<br>Flashcards</button>
+<button onclick="show('grammar')">✍️<br>Grammar Practice</button>
+<button onclick="show('notes')">⚡<br>Quick Notes</button>
+<button onclick="show('revision')">🔄<br>Quick Revision</button>
+</div>
+
+<section id="chapters" class="panel">
+<h2>📚 Chapters & Poems</h2>
+<div id="chapterList"></div>
+</section>
+
+<section id="study" class="panel hidden">
+<button class="back" onclick="show('chapters')">← Back to Chapters</button>
+<h2 id="studyTitle" style="margin-top:20px"></h2>
+<div id="studyContent"></div>
+<button onclick="completeChapter()">✓ Mark Lesson Completed</button>
+</section>
+
+<section id="questions" class="panel hidden">
+<h2>📝 Questions & Answers</h2>
+<div id="qaList"></div>
+</section>
+
+<section id="quiz" class="panel hidden">
+<h2>🧠 English Quiz</h2>
+<p id="quizCount"></p>
+<div class="card">
+<h3 id="question"></h3>
+<div id="options" class="options"></div>
+<p id="feedback"></p>
+<button id="nextBtn" class="hidden" onclick="nextQuestion()">Next →</button>
+</div>
+</section>
+
+<section id="flashcards" class="panel hidden">
+<h2>🃏 English Flashcards</h2>
+<div class="card" style="text-align:center;padding:35px 15px">
+<p id="flashNumber"></p>
+<h2 id="flashQuestion" style="color:white;margin:25px 0"></h2>
+<p id="flashAnswer" class="hidden" style="color:#70e0ad"></p>
+<button onclick="flipCard()">Flip Card</button>
+<button class="back" onclick="nextFlash()">Next →</button>
+</div>
+</section>
+
+<section id="grammar" class="panel hidden">
+<h2>✍️ Grammar Practice</h2>
+<p>Choose the correct answer. Get instant feedback!</p>
+<div class="card">
+<p id="grammarCount"></p>
+<h3 id="grammarQuestion"></h3>
+<div id="grammarOptions" class="options"></div>
+<p id="grammarFeedback"></p>
+<button id="grammarNext" class="hidden" onclick="nextGrammar()">Next Question →</button>
+</div>
+</section>
+
+<section id="notes" class="panel hidden">
+<h2>⚡ Quick Notes</h2>
+<div id="notesList"></div>
+</section>
+
+<section id="revision" class="panel hidden">
+<h2>🔄 Quick Revision</h2>
+<div id="revisionList"></div>
+</section>
+
+</div>
+
+<footer>Made with ❤️ for learners | Study.net</footer>
+
+<script>
+const lessons=[
+{
+title:"Goodnight Tinku",
+type:"Story",
+summary:"This lesson is about a child named Tinku and the events surrounding bedtime. Read your textbook carefully to understand the characters, events and feelings.",
+points:"Focus on the main characters, sequence of events, important conversations and the message of the story.",
+q:"Who is the central character in the lesson?",
+a:"Tinku is the central character. Refer to your textbook for the detailed events and supporting characters."
+},
+{
+title:"How the Firefly Got Its Light",
+type:"Story",
+summary:"This story explains how the firefly got its light through a tale of imagination. Notice the characters, important events and how the story develops.",
+points:"Remember the sequence of events, the reason for the firefly's light and the lesson conveyed by the story.",
+q:"What is the story mainly about?",
+a:"It is about how the firefly got its light. Use the textbook story to write the complete explanation."
+},
+{
+title:"That's What Friends Are For",
+type:"Story",
+summary:"This lesson explores friendship, caring and helping others. Pay attention to how the characters behave and support one another.",
+points:"Focus on friendship, kindness, the characters' actions and the central message.",
+q:"What is one important value highlighted in the lesson?",
+a:"Friendship and helping one another are important themes. Support your answer with an incident from the textbook."
+},
+{
+title:"How Creatures Move",
+type:"Poem",
+summary:"The poem describes how different creatures move. Observe the movement words and the rhythm used by the poet.",
+points:"Learn the names of the creatures, their movements, rhyming words and the central idea.",
+q:"What is the poem mainly describing?",
+a:"The different ways in which creatures move."
+}
+];
+
+let completed=JSON.parse(localStorage.getItem("englishDone")||"[]");
+let points=Number(localStorage.getItem("englishPoints")||0);
+let current=0;
+
+function show(id){
+document.querySelectorAll(".panel").forEach(p=>p.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function update(){
+document.getElementById("completed").textContent=completed.length;
+document.getElementById("score").textContent=points;
+let p=Math.round(completed.length/lessons.length*100);
+document.getElementById("progressBar").style.width=p+"%";
+document.getElementById("progressText").textContent="Your learning progress: "+p+"%";
+}
+
+function renderChapters(){
+document.getElementById("chapterList").innerHTML=lessons.map((l,i)=>`
+<div class="card chapter">
+<div><h3>${i+1}. ${l.title}</h3><small>${l.type} • ${completed.includes(i)?"✅ Completed":"📖 Start learning"}</small></div>
+<button onclick="openLesson(${i})">Study →</button>
+</div>`).join("");
+}
+
+function openLesson(i){
+current=i;
+let l=lessons[i];
+document.getElementById("studyTitle").textContent="📖 "+l.title;
+document.getElementById("studyContent").innerHTML=`
+<div class="card"><h3>📘 Lesson Overview</h3><p>${l.summary}</p></div>
+<div class="card"><h3>💡 Important Points</h3><p>${l.points}</p></div>
+<div class="card"><h3>📝 Practice Question</h3><p>${l.q}</p><div style="display:block" class="answer">${l.a}</div></div>
+<div class="card"><h3>📖 Textbook Study</h3><p>Read the complete lesson in your prescribed textbook. These are revision notes, not a replacement for the original text.</p></div>`;
+show("study");
+}
+
+function completeChapter(){
+if(!completed.includes(current)){
+completed.push(current);
+localStorage.setItem("englishDone",JSON.stringify(completed));
+}
+update();renderChapters();
+alert("🎉 Lesson completed!");
+}
+
+function renderQA(){
+document.getElementById("qaList").innerHTML=lessons.map((l,i)=>`
+<div class="card"><h3>${l.title}</h3><p><b>Q:</b> ${l.q}</p>
+<button onclick="toggleAnswer(${i})">Show Answer</button>
+<div class="answer" id="answer${i}">${l.a}</div></div>`).join("");
+}
+
+function toggleAnswer(i){
+let e=document.getElementById("answer"+i);
+e.style.display=e.style.display==="block"?"none":"block";
+}
+
+const quiz=[
+["What is the plural of child?",["Childs","Children","Childes","Childrens"],1],
+["Choose the correct spelling.",["Beautifull","Beutiful","Beautiful","Beautifal"],2],
+["What is the past tense of go?",["Goed","Gone","Went","Going"],2],
+["Which is a pronoun?",["Beautiful","He","Quickly","School"],1],
+["What is the opposite of brave?",["Courageous","Fearful","Strong","Bold"],1],
+["Which punctuation mark ends a question?",["Full stop","Comma","Question mark","Colon"],2],
+["Choose the correct article: ___ apple.",["A","An","Thee","No article"],1],
+["What is the noun in 'The bird sings'?",["The","Bird","Sings","None"],1],
+["What is the comparative form of tall?",["Tallest","More tall","Taller","Talling"],2],
+["Choose the correct verb: She ___ reading.",["Are","Am","Is","Be"],2]
+];
+
+let qi=0,answered=false,quizScore=0;
+function loadQuiz(){
+answered=false;
+document.getElementById("quizCount").textContent="Question "+(qi+1)+" of "+quiz.length;
+document.getElementById("question").textContent=quiz[qi][0];
+document.getElementById("feedback").textContent="";
+document.getElementById("nextBtn").classList.add("hidden");
+document.getElementById("options").innerHTML=quiz[qi][1].map((o,i)=>`<button onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+}
+function answerQuiz(i){
+if(answered)return;
+answered=true;
+let correct=quiz[qi][2];
+let b=document.querySelectorAll("#options button");
+b[correct].classList.add("correct");
+if(i===correct){
+quizScore++;points++;
+localStorage.setItem("englishPoints",points);
+document.getElementById("feedback").textContent="✅ Correct! +1 learning point";
+}else{
+b[i].classList.add("wrong");
+document.getElementById("feedback").textContent="❌ Correct answer: "+quiz[qi][1][correct];
+}
+update();
+document.getElementById("nextBtn").classList.remove("hidden");
+document.getElementById("nextBtn").textContent=qi===quiz.length-1?"See Results 🏆":"Next →";
+}
+function nextQuestion(){
+qi++;
+if(qi>=quiz.length){
+document.getElementById("question").textContent="🏆 Quiz Completed!";
+document.getElementById("options").innerHTML="";
+document.getElementById("feedback").textContent="Your score: "+quizScore+" / "+quiz.length;
+document.getElementById("nextBtn").textContent="Try Again";
+document.getElementById("nextBtn").onclick=()=>{
+qi=0;quizScore=0;
+document.getElementById("nextBtn").onclick=nextQuestion;
+loadQuiz();
+};
+return;
+}
+loadQuiz();
+}
+
+const flash=[
+["Noun","A naming word for a person, place, animal or thing."],
+["Pronoun","A word used instead of a noun."],
+["Adjective","A word that describes a noun or pronoun."],
+["Adverb","A word that describes a verb, adjective or another adverb."],
+["Verb","A word that expresses an action or state."],
+["Synonym","A word with a similar meaning."],
+["Antonym","A word with an opposite meaning."],
+["Simile","A comparison using 'like' or 'as'."],
+["Metaphor","A direct comparison between two unlike things."],
+["Stanza","A group of lines in a poem."]
+];
+let fi=0;
+function renderFlash(){
+document.getElementById("flashNumber").textContent="Card "+(fi+1)+" / "+flash.length;
+document.getElementById("flashQuestion").textContent=flash[fi][0];
+document.getElementById("flashAnswer").textContent=flash[fi][1];
+document.getElementById("flashAnswer").classList.add("hidden");
+}
+function flipCard(){document.getElementById("flashAnswer").classList.toggle("hidden")}
+function nextFlash(){fi=(fi+1)%flash.length;renderFlash()}
+
+const grammar=[
+["Neither Ryan nor her friends ___ present.",["is","are","was"],1],
+["She ___ to school every day.",["go","goes","going"],1],
+["They ___ playing football.",["is","am","are"],2],
+["I have ___ umbrella.",["a","an","the"],1],
+["He ___ finished his homework.",["have","has","having"],1],
+["The sun ___ in the east.",["rise","rises","rising"],1],
+["If I ___ rich, I would help others.",["am","was","were"],2],
+["Each of the boys ___ a book.",["have","has","are"],1],
+["She is taller ___ her sister.",["then","than","that"],1],
+["We ___ watching a movie yesterday.",["was","were","are"],1],
+["There ___ many books on the table.",["is","are","was"],1],
+["He speaks English ___.",["fluent","fluently","fluency"],1],
+["The children ___ happy.",["is","are","am"],1],
+["I ___ my friend yesterday.",["meet","meets","met"],2],
+["Neither of the answers ___ correct.",["are","is","were"],1]
+];
+
+let gi=0,grammarDone=false;
+function loadGrammar(){
+grammarDone=false;
+document.getElementById("grammarCount").textContent="Question "+(gi+1)+" of "+grammar.length;
+document.getElementById("grammarQuestion").textContent=grammar[gi][0];
+document.getElementById("grammarFeedback").textContent="";
+document.getElementById("grammarNext").classList.add("hidden");
+document.getElementById("grammarOptions").innerHTML=grammar[gi][1].map((o,i)=>`<button onclick="answerGrammar(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+}
+function answerGrammar(i){
+if(grammarDone)return;
+grammarDone=true;
+let correct=grammar[gi][2];
+let b=document.querySelectorAll("#grammarOptions button");
+b[correct].classList.add("correct");
+if(i===correct){
+points++;
+localStorage.setItem("englishPoints",points);
+document.getElementById("grammarFeedback").textContent="✅ Correct! Well done!";
+}else{
+b[i].classList.add("wrong");
+document.getElementById("grammarFeedback").textContent="❌ Correct answer: "+grammar[gi][1][correct];
+}
+update();
+document.getElementById("grammarNext").classList.remove("hidden");
+document.getElementById("grammarNext").textContent=gi===grammar.length-1?"Finish 🎉":"Next Question →";
+}
+function nextGrammar(){
+gi++;
+if(gi>=grammar.length){
+document.getElementById("grammarQuestion").textContent="🎉 Grammar Practice Completed!";
+document.getElementById("grammarOptions").innerHTML="";
+document.getElementById("grammarFeedback").textContent="You completed all grammar questions!";
+document.getElementById("grammarNext").textContent="Try Again";
+document.getElementById("grammarNext").onclick=()=>{
+gi=0;
+document.getElementById("grammarNext").onclick=nextGrammar;
+loadGrammar();
+};
+return;
+}
+loadGrammar();
+}
+
+function renderNotes(){
+document.getElementById("notesList").innerHTML=lessons.map(l=>`
+<div class="card"><h3>${l.title}</h3><p>${l.points}</p></div>`).join("");
+}
+function renderRevision(){
+document.getElementById("revisionList").innerHTML=`
+<div class="card"><h3>📖 Prose Revision</h3><p>Revise characters, setting, sequence of events, important incidents and the message of each story.</p></div>
+<div class="card"><h3>🎵 Poetry Revision</h3><p>Learn the central idea, rhyming words, poetic devices and movement words in the poem.</p></div>
+<div class="card"><h3>✍️ Grammar Revision</h3><p>Practise subject-verb agreement, tenses, articles, pronouns, adjectives, adverbs and punctuation.</p></div>
+<div class="card"><h3>📝 Exam Tip</h3><p>Write answers in complete sentences. Read each question carefully and check spelling and punctuation.</p></div>`;
+}
+function goHome(){window.location.href="index.html"}
+
+renderChapters();
+renderQA();
+renderNotes();
+renderRevision();
+loadQuiz();
+renderFlash();
+loadGrammar();
+update();
+</script>
+</body>
+  </html>
+  
